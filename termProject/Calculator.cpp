@@ -47,7 +47,7 @@ int Calculator::operation(int a, int b, const char anOperator) {
 		return a + b;
 	}
 	if (anOperator == '-') {
-		return a - b;
+		return b - a;
 	}
 	if (anOperator == '*') {
 		return a * b;

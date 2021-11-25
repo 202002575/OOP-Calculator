@@ -44,13 +44,13 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 			operatorStack.push(infixStr[i]);
 		}
 		else if (infixStr[i] == ')') {//ดÝดย ฐýศฃ
-			while (operatorStack.peek() != '(' || operatorStack.getSize() > 0) {
-				postfixStr += ' ';
-				postfixStr += operatorStack.pop();
-				lastIsOperator = true;
+			while (operatorStack.peek() != '(') {
 				if (operatorStack.getSize() == 0) {
 					throw 0;
 				}
+				postfixStr += ' ';
+				postfixStr += operatorStack.pop();
+				lastIsOperator = true;
 			}
 			operatorStack.pop();
 		}
