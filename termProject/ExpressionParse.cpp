@@ -34,7 +34,8 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 				throw 0;
 			}
 			postfixStr += ' ';
-			if (!operatorStack.isEmpty() && (ExpressionParse::compareOperators(operatorStack.peek(), infixStr[i]))) {
+			if (!operatorStack.isEmpty() &&
+					(ExpressionParse::compareOperators(operatorStack.peek(), infixStr[i]))) {
 				//스택에 있는 연산자의 우선순위가 더 크거나 같으면
 				postfixStr += operatorStack.pop();
 				postfixStr += ' ';
@@ -43,10 +44,13 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 			operatorStack.push(infixStr[i]);
 		}
 		else if (infixStr[i] == ')') {//닫는 괄호
-			while (operatorStack.peek() != '(') {
+			while (operatorStack.peek() != '(' || operatorStack.getSize() > 0) {
 				postfixStr += ' ';
 				postfixStr += operatorStack.pop();
 				lastIsOperator = true;
+				if (operatorStack.getSize() == 0) {
+					throw 0;
+				}
 			}
 			operatorStack.pop();
 		}

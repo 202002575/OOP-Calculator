@@ -14,7 +14,10 @@ private:
 		}
 		this->expression = aString;
 		try {
-			ExpressionParse::infixToPostfix(expression);
+			if (!ExpressionParse::infixToPostfix(expression)) {
+				throw 0;
+			}
+			
 			AppView::outputLine("// 후위 표기식: " + this->expression);
 			calculator->calculate(this->expression);
 		}
