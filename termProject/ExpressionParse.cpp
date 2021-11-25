@@ -29,7 +29,8 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 		}
 		else if ((infixStr[i] == '+') || (infixStr[i] == '-') ||
 			(infixStr[i] == '*') || (infixStr[i] == '/')) {//¿¬»êÀÚ
-			if ((i == 1) || (infixStr[i - 1] == '+') || (infixStr[i - 1] == '-') ||
+			int j = i - 1;
+			if ((i == infixStr.size()-2) || (infixStr[i - 1] == '(') || (infixStr[i - 1] == '+') || (infixStr[i - 1] == '-') ||
 				(infixStr[i - 1] == '*') || (infixStr[i - 1] == '/')) {
 				throw 0;
 			}
@@ -44,6 +45,10 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 			operatorStack.push(infixStr[i]);
 		}
 		else if (infixStr[i] == ')') {//´Ý´Â °ýÈ£
+			if ((infixStr[i - 1] == '+') || (infixStr[i - 1] == '-') ||
+				(infixStr[i - 1] == '*') || (infixStr[i - 1] == '/')) {
+				throw 0;
+			}
 			while (operatorStack.peek() != '(') {
 				if ((operatorStack.getSize() == 0)) {
 					throw 0;
