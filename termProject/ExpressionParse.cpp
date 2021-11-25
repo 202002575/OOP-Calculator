@@ -45,7 +45,7 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 		}
 		else if (infixStr[i] == ')') {//닫는 괄호
 			while (operatorStack.peek() != '(') {
-				if (operatorStack.getSize() == 0) {
+				if ((operatorStack.getSize() == 0)) {
 					throw 0;
 				}
 				postfixStr += ' ';
@@ -53,6 +53,9 @@ bool ExpressionParse::infixToPostfix(std::string &aString) {
 				lastIsOperator = true;
 			}
 			operatorStack.pop();
+			if ((i != infixStr.size()-1) && (operatorStack.isEmpty())) {	// "(" + "())(()" + ")" 방지
+				throw 0;
+			}
 		}
 		else if (infixStr[i] == ' ') {	//공백 없애기
 			continue;
