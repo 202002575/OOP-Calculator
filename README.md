@@ -1,2 +1,2 @@
-# 객체지향설계
-# 계산기 term project
+# 객체지향설계 term project
+계산기 구현하기
